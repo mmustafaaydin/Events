@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EPİAŞ Global Events Index 2026</title>
+<style>
+:root{
+  --bg:#0B1120;--surface:#111827;--surface2:#1a2236;--surface3:#232f47;
+  --border:#1e2d47;--border2:#2a3f63;
+  --text:#e8edf5;--text2:#8da3c0;--text3:#4d6484;
+  --green:#22c55e;--green-bg:#052e16;--green-dim:#16a34a;
+  --amber:#f59e0b;--amber-bg:#1c1000;
+  --blue:#3b82f6;--blue-bg:#0c1a35;
+  --purple:#a78bfa;--purple-bg:#1a0a35;
+  --orange:#f97316;--orange-bg:#1c0d00;
+  --red:#ef4444;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh}
+body{padding:0}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:32px;height:32px;background:linear-gradient(135deg,#1d4ed8,#0ea5e9);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;letter-spacing:-.5px;flex-shrink:0}
+.brand-name{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.2px}
+.brand-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.updated{font-size:11px;color:var(--text3)}
+.updated span{color:var(--text2)}
+
+/* ── FILTERS ── */
+.filters-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px}
+.filters-inner{display:flex;gap:10px;flex-wrap:wrap;align-items:center;max-width:1400px;margin:0 auto}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 12px 8px 36px;color:var(--text);font-size:13px;font-family:var(--font);outline:none;transition:border .15s}
+.search-wrap input:focus{border-color:var(--blue)}
+.search-wrap input::placeholder{color:var(--text3)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+select{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:12px;font-family:var(--font);cursor:pointer;outline:none;transition:border .15s;-webkit-appearance:none;appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234d6484' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}
+select:focus{border-color:var(--blue)}
+.filter-count{font-size:11px;color:var(--text3);white-space:nowrap;margin-left:4px}
+
+/* ── STATS ROW ── */
+.stats-row{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 24px}
+.stats-inner{display:flex;gap:8px;flex-wrap:wrap;max-width:1400px;margin:0 auto}
+.stat{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;display:flex;flex-direction:column;align-items:center;min-width:80px}
+.stat-n{font-size:20px;font-weight:700;line-height:1}
+.stat-l{font-size:10px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+.stat-total .stat-n{color:var(--text)}
+.stat-env .stat-n{color:#22d3ee}
+.stat-min .stat-n{color:var(--amber)}
+.stat-both .stat-n{color:var(--purple)}
+.stat-crit .stat-n{color:var(--red)}
+.stat-up .stat-n{color:var(--green)}
+.stat-miss .stat-n{color:var(--orange)}
+
+/* ── LEGEND ── */
+.legend{padding:8px 24px;background:var(--surface);border-bottom:1px solid var(--border)}
+.legend-inner{display:flex;gap:16px;flex-wrap:wrap;max-width:1400px;margin:0 auto;align-items:center}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.ld-crit{background:#7f1d1d;border:1px solid var(--red)}
+.ld-high{background:var(--green-bg);border:1px solid var(--green-dim)}
+.ld-both{background:var(--purple-bg);border:1px solid var(--purple)}
+.ld-miss{background:var(--orange-bg);border:1px solid var(--orange)}
+.ld-post{background:#1e1b2e;border:1px solid #6d28d9}
+.ld-std{background:var(--surface2);border:1px solid var(--border2)}
+
+/* ── TABLE ── */
+.table-wrap{padding:0 24px 32px;max-width:1400px;margin:0 auto}
+.tbl-container{margin-top:16px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:var(--surface2);padding:10px 12px;text-align:left;font-weight:500;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none;letter-spacing:.04em;text-transform:uppercase}
+thead th:hover{color:var(--text2)}
+thead th.active{color:var(--blue)}
+.sort-arr{margin-left:3px;opacity:.4}
+th.active .sort-arr{opacity:1;color:var(--blue)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s;cursor:default}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--surface2)}
+tbody tr.r-crit{background:#18090988}
+tbody tr.r-high{background:#04160a88}
+tbody tr.r-both{background:#130a2288}
+tbody tr.r-miss{background:#1c0d0088}
+tbody tr.r-post{background:#100e1a88}
+tbody tr.r-crit:hover,tbody tr.r-high:hover,tbody tr.r-both:hover,tbody tr.r-miss:hover,tbody tr.r-post:hover{filter:brightness(1.15)}
+td{padding:10px 12px;vertical-align:top;color:var(--text);line-height:1.5}
+.ev-name a{color:var(--text);text-decoration:none;font-weight:500;font-size:12px;line-height:1.4}
+.ev-name a:hover{color:var(--blue)}
+.ev-org{font-size:11px;color:var(--text3);margin-top:3px}
+.notes-cell{font-size:11px;color:var(--text2);line-height:1.5;max-width:320px}
+.cat-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;letter-spacing:.03em;white-space:nowrap}
+.cb-env{background:#083344;color:#22d3ee;border:1px solid #155e75}
+.cb-min{background:var(--amber-bg);color:var(--amber);border:1px solid #92400e}
+.cb-both{background:var(--purple-bg);color:var(--purple);border:1px solid #5b21b6}
+.pri-wrap{display:flex;flex-direction:column;gap:3px}
+.pri-label{font-size:11px;white-space:nowrap}
+.status-label{font-size:10px;color:var(--text3);white-space:nowrap}
+.date-cell{white-space:nowrap;font-size:11px;color:var(--text2)}
+.loc-cell{font-size:11px;color:var(--text2)}
+.reg-cell{font-size:11px}
+.reg-cell a{color:var(--blue);text-decoration:none}
+.reg-cell a:hover{text-decoration:underline}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:48px 24px;color:var(--text3)}
+.empty svg{margin:0 auto 12px;display:block;opacity:.3}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .topbar,.filters-wrap,.stats-row,.legend,.table-wrap{padding-left:14px;padding-right:14px}
+  .tbl-container{overflow-x:auto}
+  table{min-width:800px}
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">EP</div>
+    <div>
+      <div class="brand-name">EPİAŞ Global Events Index</div>
+      <div class="brand-sub">Environmental &amp; Minerals Markets · 2026</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="updated">Last updated <span id="lastUpdated">–</span></div>
+  </div>
+</div>
+
+<div class="filters-wrap">
+  <div class="filters-inner">
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="q" placeholder="Search events, locations, topics, notes…" oninput="render()">
+    </div>
+    <select id="fCat" onchange="render()">
+      <option value="">All categories</option>
+      <option value="Environmental">Environmental</option>
+      <option value="Minerals">Minerals</option>
+      <option value="Both">Both</option>
+    </select>
+    <select id="fRegion" onchange="render()">
+      <option value="">All regions</option>
+      <option value="Türkiye">Türkiye</option>
+      <option value="EU">EU</option>
+      <option value="UK">UK</option>
+      <option value="Gulf / MENA">Gulf / MENA</option>
+      <option value="Africa">Africa</option>
+      <option value="Latin America">Latin America</option>
+      <option value="Central Asia / Far East">Central Asia / Far East</option>
+      <option value="North America">North America</option>
+      <option value="Far East / Asia Pacific">Far East / Asia Pacific</option>
+      <option value="Global">Global</option>
+    </select>
+    <select id="fMonth" onchange="render()">
+      <option value="">All months</option>
+      <option value="01">January</option><option value="02">February</option>
+      <option value="03">March</option><option value="04">April</option>
+      <option value="05">May</option><option value="06">June</option>
+      <option value="07">July</option><option value="08">August</option>
+      <option value="09">September</option><option value="10">October</option>
+      <option value="11">November</option><option value="12">December</option>
+    </select>
+    <select id="fPri" onchange="render()">
+      <option value="">All priorities</option>
+      <option value="critical">Critical ⭐⭐</option>
+      <option value="high">High ⭐</option>
+      <option value="standard">Standard</option>
+    </select>
+    <select id="fStatus" onchange="render()">
+      <option value="">All statuses</option>
+      <option value="upcoming">Upcoming</option>
+      <option value="completed">Completed</option>
+      <option value="missed">Missed</option>
+      <option value="postponed">Postponed</option>
+    </select>
+    <span class="filter-count" id="filterCount"></span>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stats-inner" id="stats"></div>
+</div>
+
+<div class="legend">
+  <div class="legend-inner">
+    <div class="leg"><div class="leg-dot ld-crit"></div>Critical — must attend</div>
+    <div class="leg"><div class="leg-dot ld-high"></div>High priority</div>
+    <div class="leg"><div class="leg-dot ld-both"></div>Both categories (Env + Min)</div>
+    <div class="leg"><div class="leg-dot ld-miss"></div>Missed — do not repeat</div>
+    <div class="leg"><div class="leg-dot ld-post"></div>Postponed</div>
+    <div class="leg"><div class="leg-dot ld-std"></div>Standard</div>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <div class="tbl-container">
+    <table id="evtTable">
+      <thead>
+        <tr>
+          <th onclick="sortBy('name')" style="width:22%">Event <span class="sort-arr" id="sa-name">↕</span></th>
+          <th onclick="sortBy('date')" style="width:9%">Date <span class="sort-arr" id="sa-date">↓</span></th>
+          <th onclick="sortBy('location')" style="width:13%">Location <span class="sort-arr" id="sa-location">↕</span></th>
+          <th onclick="sortBy('region')" style="width:10%">Region <span class="sort-arr" id="sa-region">↕</span></th>
+          <th onclick="sortBy('category')" style="width:8%">Category <span class="sort-arr" id="sa-category">↕</span></th>
+          <th onclick="sortBy('priority')" style="width:10%">Priority <span class="sort-arr" id="sa-priority">↕</span></th>
+          <th style="width:24%">Notes</th>
+          <th style="width:4%">Reg</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" style="display:none">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      No events match the current filters.
+    </div>
+  </div>
+</div>
+
+<script>
+const EVENTS = [{"name": "World Future Energy Summit (WFES)", "date": "2026-01-13", "end": "2026-01-15", "location": "Abu Dhabi, UAE", "topic": "Renewable Energy / Climate Finance", "url": "https://www.worldfutureenergysummit.com", "reg": "https://www.worldfutureenergysummit.com/register", "organizer": "Masdar / Abu Dhabi Sustainability Week", "notes": "Gulf / MENA flagship. Critical for EPİAŞ regional visibility & Gulf partnerships.", "category": "Environmental", "region": "Gulf / MENA", "priority": "standard", "status": "completed", "month": "01"}, {"name": "Future Minerals Forum (FMF 2026)", "date": "2026-01-13", "end": "2026-01-15", "location": "Riyadh, Saudi Arabia", "topic": "Critical Minerals / Mining Investment / Mineral Corridors / Gulf", "url": "https://www.futuremineralsforum.com", "reg": "https://www.futuremineralsforum.com", "organizer": "Saudi Ministry of Industry & Mineral Resources", "notes": "🟠 MISSED. Under King's patronage. 100+ ministers. 7 mineral corridors (Africa, LatAm, Central Asia). Gateway to Funding investor sessions co-located. BOTH axes: minerals primary + sustainability/ESG tracks confirmed.", "category": "Both", "region": "Gulf / MENA", "priority": "standard", "status": "missed", "month": "01"}, {"name": "Abu Dhabi Sustainability Week (ADSW) Summit", "date": "2026-01-13", "end": "2026-01-14", "location": "Abu Dhabi, UAE", "topic": "Renewable Energy / Climate Finance / Energy Transition / Sustainability / Gulf", "url": "https://www.worldfutureenergysummit.com", "reg": "https://www.worldfutureenergysummit.com", "organizer": "Masdar / UAE Presidential Court", "notes": "70+ heads of state. 50,000+ participants. Energy, finance, food/water, AI nexus. Gulf flagship — sets tone for full year. Rule 10: Environmental primary confirmed.", "category": "Environmental", "region": "Gulf / MENA", "priority": "standard", "status": "completed", "month": "01"}, {"name": "Investing in African Mining Indaba", "date": "2026-02-09", "end": "2026-02-12", "location": "Cape Town, South Africa", "topic": "Mining Investment / Critical Minerals / ESG / Sustainability / Carbon / Africa", "url": "https://miningindaba.com", "reg": "https://miningindaba.com", "organizer": "Hyve Group", "notes": "Rule 10 scan: Dedicated sustainability track on agenda. Sessions on zero-waste/zero-emission mining, carbon footprint, decarbonisation. ERM: 'Sustainability is not a side conversation — central to the event's mission.' BOTH axes confirmed.", "category": "Both", "region": "Africa", "priority": "standard", "status": "completed", "month": "02"}, {"name": "BMO Global Metals, Mining & Critical Minerals Conference", "date": "2026-02-23", "end": "2026-02-25", "location": "Hollywood, Florida, USA", "topic": "Mining Finance / Critical Minerals / Investor Forum", "url": "https://www.bmocm.com/", "reg": "https://www.bmocm.com/", "organizer": "BMO Capital Markets", "notes": "35th annual. Institutional investor-focused. Geopolitical critical minerals, US supply chain strategy. Relevant for brownfield investment exploration.", "category": "Minerals", "region": "North America", "priority": "standard", "status": "completed", "month": "02"}, {"name": "PDAC — World's Premier Mineral Exploration & Mining Convention", "date": "2026-03-01", "end": "2026-03-04", "location": "Toronto, Canada", "topic": "Mining Exploration / Critical Minerals / Investment / ESG / Sustainability / Carbon", "url": "https://pdac.ca/convention-2026", "reg": "https://pdac.ca/convention-2026/attending-2026", "organizer": "Prospectors & Developers Association of Canada (PDAC)", "notes": "Rule 10 scan: PDAC 2026 post-event analysis confirms ESG, climate resilience and environmental responsibility as core agenda. 'The era when mining success was measured only by production volumes is over.' Sustainability programming confirmed. BOTH axes confirmed.", "category": "Both", "region": "North America", "priority": "standard", "status": "completed", "month": "03"}, {"name": "Carbon Capture MENA Summit", "date": "2026-04-01", "end": "2026-04-02", "location": "Dubai, UAE", "topic": "Carbon Markets / CCUS / MENA", "url": "https://www.carboncapturemena.com", "reg": "https://www.carboncapturemena.com/register", "organizer": "MENA Energy Leaders", "notes": "500+ attendees. MENA CCUS ecosystem. Aligns with Gulf outreach strategy.", "category": "Environmental", "region": "Gulf / MENA", "priority": "standard", "status": "completed", "month": "04"}, {"name": "European Climate Summit (ECS 2026)", "date": "2026-04-14", "end": "2026-04-16", "location": "Barcelona, Spain", "topic": "Carbon Markets / EU ETS / CBAM", "url": "https://www.ieta.org/events/european-climate-summit", "reg": "https://reg.eventmobi.com/ECS2026", "organizer": "IETA / ICAP", "notes": "⭐ HIGH PRIORITY. EU ETS, CBAM, ETS2, CRCF all on agenda. EU lobbying groups present. Direct relevance to EPİAŞ Turkey-EU carbon bridge.", "category": "Environmental", "region": "EU", "priority": "high", "status": "completed", "month": "04"}, {"name": "Latin America Energy Summit", "date": "2026-04-15", "end": "2026-04-16", "location": "Santiago, Chile", "topic": "Renewable Energy / Oil & Gas / Energy Transition / Latin America", "url": "https://www.latamenergysummit.com", "reg": "https://www.latamenergysummit.com", "organizer": "LatAm Energy Summit", "notes": "Energy companies, project developers, investors across Chile, Colombia, Peru, Brazil, Argentina. Rule 10 scan: renewables + oil & gas + critical minerals (lithium/copper). BOTH axes confirmed.", "category": "Both", "region": "Latin America", "priority": "standard", "status": "completed", "month": "04"}, {"name": "UNFCCC Regional Climate Week 3 — South Korea", "date": "2026-04-21", "end": "2026-04-25", "location": "Yeosu, South Korea", "topic": "Climate Policy / Carbon Markets / NDCs / Far East", "url": "https://unfccc.int/topics/climate-weeks", "reg": "https://unfccc.int/topics/climate-weeks", "organizer": "UNFCCC", "notes": "COP31 pre-negotiation regional session. Track NDC and carbon market positions from Far East governments. Rule 10: Environmental confirmed.", "category": "Environmental", "region": "Central Asia / Far East", "priority": "standard", "status": "completed", "month": "04"}, {"name": "Critical Minerals North America", "date": "2026-04-23", "end": "2026-04-24", "location": "Washington D.C., USA", "topic": "Critical Minerals / Mining Finance / Defense Supply Chain", "url": "https://rareearthexchanges.com", "reg": "https://rareearthexchanges.com", "organizer": "Rare Earth Exchanges", "notes": "300+ attendees, 40 speakers. Western supply chain diversification. Rare earths, lithium, cobalt. US government angle.", "category": "Minerals", "region": "North America", "priority": "standard", "status": "completed", "month": "04"}, {"name": "First Conference: Transitioning Away from Fossil Fuels", "date": "2026-04-27", "end": "2026-04-30", "location": "Santa Marta, Colombia", "topic": "Fossil Fuel Transition / Climate Policy / Energy / Latin America", "url": "https://news.mongabay.com/2026/05/fossil-fuel-transition-summit", "reg": "", "organizer": "Colombia / Netherlands co-host", "notes": "Turkey participated. 57 countries. COP30 follow-up. EPİAŞ geopolitical alignment visible — Turkey's presence noted by international media. Rule 10: Environmental confirmed.", "category": "Environmental", "region": "Latin America", "priority": "standard", "status": "completed", "month": "04"}, {"name": "Argus Europe Carbon Conference", "date": "2026-05-11", "end": "2026-05-13", "location": "Nice, France", "topic": "Carbon Markets / EU ETS / CBAM / VCM", "url": "https://www.argusmedia.com/en/events/conferences/europe-carbon-conference", "reg": "https://www.argusmedia.com/en/events/conferences/europe-carbon-conference", "organizer": "Argus Media", "notes": "200+ senior participants. EU ETS, CBAM, CRCF, CORSIA. Ideal for practitioner networking.", "category": "Environmental", "region": "EU", "priority": "standard", "status": "completed", "month": "05"}, {"name": "Africa Energies Summit (AES) 2026", "date": "2026-05-12", "end": "2026-05-14", "location": "London, UK", "topic": "Upstream Oil & Gas / LNG / Carbon Strategy / Africa Investment / Government Participation", "url": "https://www.africaenergiessummit.com", "reg": "https://www.africaenergiessummit.com", "organizer": "Frontier Energy Network / Wood Mackenzie (Knowledge Partner)", "notes": "🟠 MISSED. Rule 11 gap: similar-name trap — stopped searching after Africa Energy Forum & AEW. CRITICAL: 🇹🇷 Turkey was a confirmed government participant. Rule 1 scan: upstream oil & gas primary (minerals) + carbon strategy + LNG tracks (environmental). BOTH axes. 9th edition, London. Private deal-driven format — NOCs, IOCs, investors, governments.", "category": "Both", "region": "UK", "priority": "standard", "status": "missed", "month": "05"}, {"name": "Qatar Economic Forum (Bloomberg) — POSTPONED", "date": "2026-05-12", "end": "2026-05-14", "location": "Doha, Qatar", "topic": "Economic Policy / Climate Finance / Energy / Gulf Geopolitics", "url": "https://www.qatareconomicforum.com", "reg": "https://www.qatareconomicforum.com", "organizer": "Bloomberg / Qatar MOCI", "notes": "◆ POSTPONED Apr 8 due to 'regional developments' (US-Iran tensions). Theme: The Global Rebalance: Capital, Power & Middle East. Track rescheduled date — monitor weekly.", "category": "Environmental", "region": "Gulf / MENA", "priority": "standard", "status": "postponed", "month": "05"}, {"name": "Oman Sustainability Week (OSW) + OPES", "date": "2026-05-18", "end": "2026-05-20", "location": "Muscat, Oman", "topic": "Renewable Energy / Sustainability / Oil & Gas / OPES / MENA", "url": "https://omansustainabilityweek.com", "reg": "https://omansustainabilityweek.com", "organizer": "CONNECT / Petroleum Development Oman (PDO)", "notes": "Rule 10 scan: OSW is co-located with Oman Petroleum & Energy Show (OPES). OPES = upstream oil & gas, PDO-hosted. BOTH axes confirmed. 🟠 MISSED 2026 — must attend 2027. CEO-flagged event.", "category": "Both", "region": "Gulf / MENA", "priority": "standard", "status": "missed", "month": "05"}, {"name": "Innovate4Climate (I4C) 2026", "date": "2026-05-20", "end": "2026-05-22", "location": "Singapore", "topic": "Carbon Pricing / Carbon Markets / Climate Finance", "url": "https://www.pmiclimate.org/innovate4climate", "reg": "https://www.pmiclimate.org/innovate4climate", "organizer": "World Bank / IETA / Partnership for Market Implementation", "notes": "World Bank flagship. Article 6, ETS design, climate finance. Developing country focus — matches EPİAŞ capacity-building mandate.", "category": "Environmental", "region": "Far East / Asia Pacific", "priority": "standard", "status": "completed", "month": "05"}, {"name": "Critical Minerals Australia", "date": "2026-05-20", "end": "2026-05-21", "location": "Perth, Australia", "topic": "Critical Minerals / Mining Investment / Supply Chain", "url": "https://www.criticalmineralsaustralia.com", "reg": "https://www.criticalmineralsaustralia.com", "organizer": "Beacon Events", "notes": "300+ executives. Silver, battery metals, ESG. Australia-MENA-EU supply chain bridge potential.", "category": "Minerals", "region": "Far East / Asia Pacific", "priority": "standard", "status": "completed", "month": "05"}, {"name": "IACBAM Summit 2026", "date": "2026-05-28", "end": "2026-05-28", "location": "Prague, Czech Republic", "topic": "CBAM / Trade & Carbon Policy", "url": "https://www.iacbam.org/summit-2026", "reg": "https://www.iacbam.org/summit-2026", "organizer": "International Association for the Carbon Border Adjustment Mechanism", "notes": "Dedicated CBAM forum. CBAM now live (Jan 2026). Critical for Turkey-EU trade exposure. Masterclass sessions included.", "category": "Environmental", "region": "EU", "priority": "standard", "status": "upcoming", "month": "05"}, {"name": "RECS Market Meeting (RMM 2026)", "date": "2026-06-02", "end": "2026-06-03", "location": "Prague, Czech Republic", "topic": "Guarantees of Origin / Renewable Energy Certificates / EACs", "url": "https://recsmarket.eu", "reg": "https://recsmarket.eu", "organizer": "RECS Energy Certificate Association", "notes": "⭐ HIGH PRIORITY for EPİAŞ. GO/EAC market — core to Turkish renewable certificate system. EU GO recognition for Energy Community underway.", "category": "Environmental", "region": "EU", "priority": "high", "status": "upcoming", "month": "06"}, {"name": "Latin America Climate Summit (LACS 2026)", "date": "2026-06-02", "end": "2026-06-04", "location": "Monterrey, Mexico", "topic": "Carbon Markets / Climate Policy / Energy Transition", "url": "https://www.ieta.org/events/latin-america-climate-summit", "reg": "https://www.ieta.org/events/latin-america-climate-summit", "organizer": "IETA / ICAP", "notes": "Developing country carbon pricing. Useful for EPİAŞ knowledge exchange with non-EU markets.", "category": "Environmental", "region": "Latin America", "priority": "standard", "status": "upcoming", "month": "06"}, {"name": "Mining World Congress 2026", "date": "2026-06-03", "end": "2026-06-04", "location": "London, UK", "topic": "Mining Exploration / Critical Minerals / Investment / AI", "url": "https://miningconferences.org", "reg": "https://miningconferences.org", "organizer": "Mining Conferences Ltd", "notes": "EU-based mining investment gathering. Exploration, critical minerals, AI in mining. Good for EU-Türkiye mining market introductions.", "category": "Minerals", "region": "UK", "priority": "standard", "status": "upcoming", "month": "06"}, {"name": "Global Energy Show Canada 2026", "date": "2026-06-09", "end": "2026-06-11", "location": "Calgary, Canada", "topic": "Oil & Gas / Critical Minerals / Emissions Reduction / LNG / Electrification", "url": "https://www.globalenergyshow.com", "reg": "https://www.globalenergyshow.com/register", "organizer": "Global Energy Show / Alberta Government / Shell", "notes": "Rule 1 subtopic scan confirmed: Critical Minerals Zone + Emissions Reduction Theatre (net-zero, carbon abatement) + Electrification Zone + Canada Gas & LNG. Primary label is oil & gas but scores on BOTH Environmental and Minerals axes. 30,000+ attendees.", "category": "Both", "region": "North America", "priority": "standard", "status": "upcoming", "month": "06"}, {"name": "Africa Energy Forum (aef) 2026", "date": "2026-06-16", "end": "2026-06-19", "location": "Cape Town, South Africa", "topic": "Energy Infrastructure / Oil & Gas / Renewables / Critical Minerals / Africa Investment", "url": "https://energy-news-network.com/networking/africa-energy-forum", "reg": "https://energy-news-network.com/networking/africa-energy-forum", "organizer": "EnergyNet", "notes": "Africa's most strategic investor gathering. Energy-to-industrialisation. Rule 10 scan: critical minerals processing + mining corridors + renewables + oil & gas. BOTH axes confirmed.", "category": "Both", "region": "Africa", "priority": "standard", "status": "upcoming", "month": "06"}, {"name": "Mining & Critical Minerals Korea", "date": "2026-06-29", "end": "2026-06-29", "location": "Seoul, South Korea", "topic": "Critical Minerals / Supply Chain / Far East", "url": "https://www.criticalmineralskorea.com", "reg": "https://www.criticalmineralskorea.com", "organizer": "Beacon Events", "notes": "120+ executives. Korean critical minerals strategy. Far East investment opportunity lens for Türkiye.", "category": "Minerals", "region": "Central Asia / Far East", "priority": "standard", "status": "upcoming", "month": "06"}, {"name": "IETA Asia Climate Summit (ACS 2026)", "date": "2026-07-07", "end": "2026-07-09", "location": "Hong Kong", "topic": "Carbon Markets / Asia ETS / Climate Finance", "url": "https://www.ieta.org/events/asia-climate-summit-acs-2026", "reg": "https://reg.eventmobi.com/ACS2026", "organizer": "IETA / FSTB / SFC / HKEX", "notes": "First ACS in Hong Kong. EACs, tokenisation, cross-border markets. Explore Far East collaboration opportunities.", "category": "Environmental", "region": "Far East / Asia Pacific", "priority": "standard", "status": "upcoming", "month": "07"}, {"name": "Critical Minerals Japan", "date": "2026-09-08", "end": "2026-09-09", "location": "Tokyo, Japan", "topic": "Critical Minerals / Mining Investment / Japan Strategy", "url": "https://www.criticalmineralsjapan.com", "reg": "https://www.criticalmineralsjapan.com", "organizer": "Beacon Events", "notes": "250+ executives. Japan Indo-Pacific critical minerals strategy. Government-backed. High-value networking for Türkiye as minerals exporter.", "category": "Minerals", "region": "Far East / Asia Pacific", "priority": "standard", "status": "upcoming", "month": "09"}, {"name": "North America Climate Summit (NACS 2026)", "date": "2026-09-22", "end": "2026-09-23", "location": "New York, USA", "topic": "Carbon Markets / Climate Policy / North America ETS", "url": "https://www.ieta.org/events/north-america-climate-summit-nacs-2026", "reg": "https://www.ieta.org/events/north-america-climate-summit-nacs-2026", "organizer": "IETA / ICAP", "notes": "Coincides with Climate Week NYC. Carbon market innovation, California-Quebec-Washington linkage. Investor-rich environment.", "category": "Environmental", "region": "North America", "priority": "standard", "status": "upcoming", "month": "09"}, {"name": "African Energy Week (AEW) 2026", "date": "2026-10-12", "end": "2026-10-16", "location": "Cape Town, South Africa", "topic": "Oil & Gas / Upstream E&P / Downstream / Energy Finance / Renewables / Critical Minerals", "url": "https://aecweek.com", "reg": "https://www.aecweek-registration.com/2026", "organizer": "Africa Energy Chamber", "notes": "Rule 10 scan confirmed (agenda fetch): Upstream E&P Forum + Downstream Forum + Energy Finance Forum (oil/gas/minerals) AND Powering Africa Forum + Energy Additions Forum (environmental). 300+ ministers, 9,000+ attendees. BOTH axes confirmed.", "category": "Both", "region": "Africa", "priority": "standard", "status": "upcoming", "month": "10"}, {"name": "Carbon Forward Expo London 2026", "date": "2026-10-13", "end": "2026-10-15", "location": "London, UK", "topic": "Carbon Markets / EU ETS / UK ETS / VCM", "url": "https://carbon-forward.com/carbon-forward-expo-2026", "reg": "https://carbon-forward.com/carbon-forward-registration", "organizer": "Carbon Forward Events", "notes": "⭐ HIGH PRIORITY. 11th edition. EU+UK ETS, ETS2, CORSIA, CBAM, Article 6, removals. 500+ attendees. London = carbon finance hub.", "category": "Environmental", "region": "UK", "priority": "high", "status": "upcoming", "month": "10"}, {"name": "African Mining Week 2026", "date": "2026-10-14", "end": "2026-10-16", "location": "Cape Town, South Africa", "topic": "Mining / Critical Minerals / ESG / Sustainability / Africa", "url": "https://african-miningweek.com", "reg": "https://african-miningweek.com", "organizer": "Energy Capital & Power", "notes": "Ghana, SA, DRC, Egypt ministers. Critical minerals, local beneficiation. Rule 10 scan: sustainability + ESG + energy transition tracks confirmed alongside minerals. BOTH axes confirmed.", "category": "Both", "region": "Africa", "priority": "standard", "status": "upcoming", "month": "10"}, {"name": "Mining & Critical Minerals Europe", "date": "2026-10-20", "end": "2026-10-21", "location": "London, UK", "topic": "Critical Minerals / Mining Investment / EU Supply Chain", "url": "https://www.miningeuropeconvention.com", "reg": "https://www.miningeuropeconvention.com", "organizer": "Beacon Events", "notes": "⭐ HIGH PRIORITY. Europe's premier critical minerals event. EU supply chain sovereignty. Ideal to introduce Türkiye's mining market to European operators and investors.", "category": "Minerals", "region": "UK", "priority": "high", "status": "upcoming", "month": "10"}, {"name": "IMARC — International Mining & Resources Conference + Expo", "date": "2026-10-27", "end": "2026-10-29", "location": "Sydney, Australia", "topic": "Mining / Critical Minerals / Energy Transition / ESG / Sustainability", "url": "https://imarcglobal.com", "reg": "https://imarcglobal.com", "organizer": "Beacon Events", "notes": "Rule 10 scan: Conference streams include Energy Transition, ESG Collaboration, Mining Innovation. 500+ exhibitors covering sustainability and safety. BOTH axes confirmed.", "category": "Both", "region": "Far East / Asia Pacific", "priority": "standard", "status": "upcoming", "month": "10"}, {"name": "ADIPEC 2026", "date": "2026-11-02", "end": "2026-11-05", "location": "Abu Dhabi, UAE", "topic": "Oil & Gas / Energy Transition / Decarbonisation / Critical Minerals / Sustainability / Gulf", "url": "https://www.adipec.com", "reg": "https://www.adipec.com", "organizer": "ADNOC / dmg events", "notes": "⭐⭐ World's largest energy event. 239,000+ attendees, 160+ countries, 2,250+ exhibitors. Rule 10 scan: 13 conference programmes — critical minerals trade corridors + decarbonisation + energy transition + sustainability confirmed. Immediately before COP31. BOTH axes confirmed.", "category": "Both", "region": "Gulf / MENA", "priority": "critical", "status": "upcoming", "month": "11"}, {"name": "COP31 — UN Climate Change Conference", "date": "2026-11-09", "end": "2026-11-20", "location": "Antalya, Türkiye", "topic": "Climate Policy / Carbon Markets / UNFCCC / Global", "url": "https://cop31.tr", "reg": "https://unfccc.int/cop31", "organizer": "UNFCCC / Republic of Türkiye (Presidency)", "notes": "⭐⭐ UNMISSABLE. Hosted in Türkiye. Home ground for EPİAŞ. Carbon markets, Article 6, NDCs, climate finance. Geopolitical visibility with MENA & developing nations. CEO-level attendance expected.", "category": "Environmental", "region": "Türkiye", "priority": "critical", "status": "upcoming", "month": "11"}, {"name": "Mines and Money @ Resourcing Tomorrow (London Mining Week)", "date": "2026-12-01", "end": "2026-12-03", "location": "London, UK", "topic": "Mining Finance / Investment / Junior Mining", "url": "https://minesandmoney.com/london", "reg": "https://minesandmoney.com/london", "organizer": "Mines and Money / Hyve Group", "notes": "Europe's largest mining investment forum. Junior mining showcases, investor meetings. Part of London Mining Week (27 Nov–3 Dec).", "category": "Minerals", "region": "UK", "priority": "standard", "status": "upcoming", "month": "12"}];
+
+const MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let sortCol='date', sortDir=1;
+
+function fmtDate(d1,d2){
+  if(!d1) return '';
+  const a=new Date(d1),b=new Date(d2||d1);
+  const s=a.getDate()+' '+MO[a.getMonth()];
+  if(!d2||d1===d2) return s;
+  if(a.getMonth()===b.getMonth()) return s+'–'+b.getDate();
+  return s+'–'+b.getDate()+' '+MO[b.getMonth()];
+}
+
+function priOrder(p){return p==='critical'?0:p==='high'?1:2}
+
+function rowClass(e){
+  if(e.status==='missed') return 'r-miss';
+  if(e.status==='postponed') return 'r-post';
+  if(e.category==='Both') return 'r-both';
+  if(e.priority==='critical') return 'r-crit';
+  if(e.priority==='high') return 'r-high';
+  return '';
+}
+
+function catBadge(c){
+  if(c==='Environmental') return '<span class="cat-badge cb-env">Environmental</span>';
+  if(c==='Minerals') return '<span class="cat-badge cb-min">Minerals</span>';
+  if(c==='Both') return '<span class="cat-badge cb-both">Both</span>';
+  return '';
+}
+
+function priLabel(e){
+  const s=e.status==='missed'?'🟠 Missed':e.status==='postponed'?'◆ Postponed':e.status==='completed'?'✓ Done':'→ Upcoming';
+  const p=e.priority==='critical'?'⭐⭐ Critical':e.priority==='high'?'⭐ High':'Standard';
+  return `<div class="pri-wrap"><div class="pri-label">${p}</div><div class="status-label">${s}</div></div>`;
+}
+
+function sortBy(col){
+  document.querySelectorAll('thead th').forEach(th=>th.classList.remove('active'));
+  document.querySelectorAll('.sort-arr').forEach(a=>a.textContent='↕');
+  if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=1}
+  const th=document.querySelector(`[onclick="sortBy('${col}')"]`);
+  if(th){th.classList.add('active');const a=th.querySelector('.sort-arr');if(a)a.textContent=sortDir===1?'↑':'↓';}
+  render();
+}
+
+function render(){
+  const q=(document.getElementById('q').value||'').toLowerCase();
+  const fC=document.getElementById('fCat').value;
+  const fR=document.getElementById('fRegion').value;
+  const fM=document.getElementById('fMonth').value;
+  const fP=document.getElementById('fPri').value;
+  const fS=document.getElementById('fStatus').value;
+
+  let data=EVENTS.filter(e=>{
+    if(fC&&e.category!==fC) return false;
+    if(fR&&e.region!==fR) return false;
+    if(fM&&e.month!==fM) return false;
+    if(fP&&e.priority!==fP) return false;
+    if(fS&&e.status!==fS) return false;
+    if(q){
+      const h=(e.name+' '+e.location+' '+e.region+' '+e.notes+' '+e.topic+' '+e.organizer).toLowerCase();
+      if(!h.includes(q)) return false;
+    }
+    return true;
+  });
+
+  data.sort((a,b)=>{
+    if(sortCol==='priority') return(priOrder(a.priority)-priOrder(b.priority))*sortDir;
+    const va=sortCol==='date'?a.date:sortCol==='name'?a.name.toLowerCase():sortCol==='location'?a.location.toLowerCase():sortCol==='region'?a.region.toLowerCase():sortCol==='category'?a.category:a.date;
+    const vb=sortCol==='date'?b.date:sortCol==='name'?b.name.toLowerCase():sortCol==='location'?b.location.toLowerCase():sortCol==='region'?b.region.toLowerCase():sortCol==='category'?b.category:b.date;
+    return va<vb?-sortDir:va>vb?sortDir:0;
+  });
+
+  const tbody=document.getElementById('tbody');
+  tbody.innerHTML='';
+  data.forEach(e=>{
+    const tr=document.createElement('tr');
+    const rc=rowClass(e);
+    if(rc) tr.className=rc;
+    const regLink=e.reg&&e.reg!==e.url?`<a href="${e.reg}" target="_blank" rel="noopener">↗</a>`
+      :e.url?`<a href="${e.url}" target="_blank" rel="noopener">↗</a>`:'–';
+    tr.innerHTML=`
+      <td class="ev-name"><a href="${e.url||'#'}" target="_blank" rel="noopener">${e.name}</a><div class="ev-org">${e.organizer}</div></td>
+      <td class="date-cell">${fmtDate(e.date,e.end)}</td>
+      <td class="loc-cell">${e.location}</td>
+      <td class="loc-cell">${e.region}</td>
+      <td>${catBadge(e.category)}</td>
+      <td>${priLabel(e)}</td>
+      <td class="notes-cell">${e.notes}</td>
+      <td class="reg-cell">${regLink}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('emptyMsg').style.display=data.length?'none':'block';
+  document.getElementById('filterCount').textContent=data.length+' of '+EVENTS.length+' events';
+
+  // stats
+  const total=EVENTS.length;
+  const env=EVENTS.filter(e=>e.category==='Environmental').length;
+  const min=EVENTS.filter(e=>e.category==='Minerals').length;
+  const both=EVENTS.filter(e=>e.category==='Both').length;
+  const crit=EVENTS.filter(e=>e.priority==='critical').length;
+  const up=EVENTS.filter(e=>e.status==='upcoming').length;
+  const miss=EVENTS.filter(e=>e.status==='missed').length;
+  document.getElementById('stats').innerHTML=
+    `<div class="stat stat-total"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>`+
+    `<div class="stat stat-env"><div class="stat-n">${env}</div><div class="stat-l">Environmental</div></div>`+
+    `<div class="stat stat-min"><div class="stat-n">${min}</div><div class="stat-l">Minerals</div></div>`+
+    `<div class="stat stat-both"><div class="stat-n">${both}</div><div class="stat-l">Both</div></div>`+
+    `<div class="stat stat-crit"><div class="stat-n">${crit}</div><div class="stat-l">Critical</div></div>`+
+    `<div class="stat stat-up"><div class="stat-n">${up}</div><div class="stat-l">Upcoming</div></div>`+
+    `<div class="stat stat-miss"><div class="stat-n">${miss}</div><div class="stat-l">Missed</div></div>`;
+
+  // set last updated from most recent date in data
+  const dates=EVENTS.map(e=>e.date).filter(Boolean).sort();
+  document.getElementById('lastUpdated').textContent='26 May 2026';
+}
+
+// initial sort by date ascending
+document.querySelector('[onclick="sortBy(\'date\')"]').classList.add('active');
+document.getElementById('sa-date').textContent='↓';
+render();
+</script>
+</body>
+</html>
